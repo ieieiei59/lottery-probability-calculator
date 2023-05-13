@@ -1,0 +1,2 @@
+# global codewoner
+* @ieieiei59
