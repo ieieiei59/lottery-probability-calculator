@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/dev/app/Dockerfile
+    tty: true
+    volumes:
+      - ../../:/workspace
+    ports:
+      - 19000:3000
