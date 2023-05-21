@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  api:
+    image: ieieiei/lpc-api:dev-develop
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.lpc--api.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.lpc-api--stripprefix.stripprefix.prefixes=/lpc/api"
+      - "traefik.http.routers.lpc--api.rule=Host(`dev-server.ieieiei.com`) && PathPrefix(`/lpc/api`)"
+      - "traefik.http.routers.lpc--api.entrypoints=web"
+      - "traefik.http.routers.lpc--api.tls.certresolver=default"
+      - "traefik.http.routers.lpc--api.middlewares=lpc-api--stripprefix"
+    networks:
+      - service-proxy
+
+networks:
+  service-proxy:
+    external: true
