@@ -1,5 +1,14 @@
 {
   "dockerComposeFile": ["../compose.yml", "compose.yml"],
   "service": "app",
-  "workspaceFolder": "/workspace/services/api"
+  "workspaceFolder": "/workspace/services/api",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mhutchie.git-graph",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
 }
