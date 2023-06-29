@@ -9,4 +9,6 @@ services:
     volumes:
       - ../../:/workspace
     ports:
-      - 19000:3000
+      - 19000:4000
+    env_file:
+      - ./.env

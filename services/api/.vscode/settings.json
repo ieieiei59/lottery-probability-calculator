@@ -10,7 +10,7 @@
   "[jsonc]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "jest.jestCommandLine": "yarn test",
-  "jest.rootPath": "/workspace/services/api"
+  }
+  // "jest.jestCommandLine": "yarn test",
+  // "jest.rootPath": "/workspace/services/api"
 }

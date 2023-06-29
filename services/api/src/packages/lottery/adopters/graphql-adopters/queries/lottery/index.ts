@@ -1,0 +1,1 @@
+import "./lottery/lottery.query";
