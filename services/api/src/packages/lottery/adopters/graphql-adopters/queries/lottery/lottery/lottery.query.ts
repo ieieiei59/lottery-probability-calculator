@@ -3,6 +3,7 @@ import { Lottery } from "../../../object-types/lottery.type";
 import { container } from "tsyringe";
 import { GetLotteryQuery } from "@lpc/packages/lotterylottery/usecases/queries/lottery/get-lottery/query";
 import { GetLotteryQueryInputSchema } from "@lpc/packages/lotterylottery/usecases/queries/lottery/get-lottery/input";
+import { Base64 } from "src/libs/base64";
 
 export const LotteryInput = builder.inputType("LotteryInput", {
   fields: (t) => ({
@@ -18,7 +19,7 @@ builder.queryField("Lottery", (t) =>
     },
     nullable: true,
     resolve: async (parent, args, context: unknown) => {
-      const id = Number(args.id.toString().split(":")[1]);
+      const id = Number(Base64.decode(args.id.toString()).split(":")[1]);
       const input = GetLotteryQueryInputSchema.parse({ id });
 
       const query = container.resolve(GetLotteryQuery);
@@ -27,7 +28,7 @@ builder.queryField("Lottery", (t) =>
 
       return {
         ...result.lottery,
-        id: `Lottery:${result.lottery.id}`,
+        id: Base64.encode(`Lottery:${result.lottery.id}`),
       };
     },
   })
