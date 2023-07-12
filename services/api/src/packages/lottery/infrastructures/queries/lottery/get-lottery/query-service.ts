@@ -5,23 +5,17 @@ import { getPlanetScaleClient } from "@lpc/db/planet-scale/client";
 import { lotterySchema } from "@lpc/db/planet-scale/schema/lottery.schema";
 import { injectable } from "tsyringe";
 
-function buildLotteryData(id: number) {
-  return { id, title: `lottery-${id}`, beginDate: null, endDate: null };
-}
-const lotteryData = [...Array(100)].map((_, val) => buildLotteryData(val + 1));
-
 @injectable()
 export class GetLotteryQueryService implements GetLotteryQueryServiceInterface {
   async query(id: number): Promise<GetLotteryDto> {
     const client = await getPlanetScaleClient();
-    // const lottery = lotteryData.find((item) => item.id === id);
     const lotteries = await client
       .select()
       .from(lotterySchema)
       .where(eq(lotterySchema.id, id));
 
     if (lotteries.length < 1) {
-      throw new Error(`Lottery is not found! (id=${id}`);
+      throw new Error(`Lottery is not found! (id=${id})`);
     }
 
     return {
